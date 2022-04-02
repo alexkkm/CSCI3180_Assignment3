@@ -61,13 +61,14 @@ class Tournament:
             else:
                 if damage_first > damage_second:
                     winner_info = "Fighter {} wins".format(fighter_first.properties["NO"])
-                elif damage_second < damage_first:
+                elif damage_second > damage_first:
                     winner_info = "Fighter {} wins".format(fighter_second.properties["NO"])
 
             print("Duel {}: Fighter {} VS Fighter {}, {}".format(fight_cnt, team1_fighter.properties["NO"],
                     team2_fighter.properties["NO"], winner_info))
             team1_fighter.print_info()
             team2_fighter.print_info()
+            fight_cnt += 1
 
         print("Fighters at rest:")
         for team in [self.team1, self.team2]:
@@ -135,12 +136,18 @@ class Tournament:
                 order1 = input().split(" ")
                 order1 = [int(order) for order in order1]
                 flag_valid = True
+                undefeated_number = 0
                 for order in order1:
                     if order not in range(1, 5):
                         flag_valid = False
                     elif self.team1.fighter_list[order - 1].check_defeated():
                         flag_valid = False
                 if len(order1) != len(set(order1)):
+                    flag_valid = False
+                for i in range(4):
+                    if not self.team1.fighter_list[i].check_defeated():
+                        undefeated_number += 1
+                if undefeated_number != len(order1):
                     flag_valid = False
                 if flag_valid:
                     break
@@ -152,12 +159,18 @@ class Tournament:
                 order2 = input().split(" ")
                 order2 = [int(order) for order in order2]
                 flag_valid = True
+                undefeated_number = 0
                 for order in order2:
                     if order not in range(5, 9):
                         flag_valid = False
                     elif self.team2.fighter_list[order - 1 - 4].check_defeated():
                         flag_valid = False
                 if len(order2) != len(set(order2)):
+                    flag_valid = False
+                for i in range(4):
+                    if not self.team2.fighter_list[i].check_defeated():
+                        undefeated_number += 1
+                if undefeated_number != len(order2):
                     flag_valid = False
                 if flag_valid:
                     break

@@ -17,6 +17,15 @@ sub check_defeated{
 }
 
 sub print_info{
+  my $self = shift;
+  
+  my $defeated_info;
+  if ($self -> check_defeated() == 1){
+    $defeated_info = "defeated";
+  }else{
+    $defeated_info = "undefeated";
+  }
+  print "fighter $self->{'NO'}: HP: $self->{'HP'} attack: $self->{'attack'} defense: $self->{'defense'} speed: $self->{'speed'} $defeated_info\n";
 }
 
 
