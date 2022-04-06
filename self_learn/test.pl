@@ -12,10 +12,14 @@ $b="12aB";
 $c="abc";
 
 print($a,"\n"); # this is also ok for only one variable
-print("$a\n");
+print("a: $a\n");
 
 
 # variable in perl is dynamic type
 $new=123;
 $new="a";
-print("$new\n");
+print("new: $new\n");
+
+@newList=();
+@newlist=push(@newList,'1');
+print "newList: @newlist\n";
